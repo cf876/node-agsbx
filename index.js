@@ -19,7 +19,6 @@ const SUB_PATH = process.env.SUB_PATH || 'sub/${UUID}';            // 获取节�
 const PORT = process.env.PORT || 7860;                     // http和ws服务端口
 const subtxt = `${process.env.HOME}/agsbx/jh.txt`;
 const NAME = process.env.NAME || os.hostname();
-const uuid = process.env.uuid || UUID;
 
 
 let ISP = '';
