@@ -15,13 +15,9 @@ const NEZHA_KEY = process.env.NEZHA_KEY || '';             // v1的NZ_CLIENT_SEC
 const DOMAIN = process.env.DOMAIN || '1234.abc.com';       // 填写项目域名或已反代的域名，不带前缀，建议填已反代的域名
 const AUTO_ACCESS = process.env.AUTO_ACCESS || true;       // 是否开启自动访问保活,false为关闭,true为开启,需同时填写DOMAIN变量
 const WSPATH = process.env.WSPATH || UUID.slice(0, 8);     // 节点路径，默认获取uuid前8位
-const SUB_PATH = process.env.SUB_PATH || 'sub/${UUID}';            // 获取节点的订阅路径
+const SUB_PATH = process.env.SUB_PATH || 'sub';            // 获取节点的订阅路径
 const NAME = process.env.NAME || 'Hug';                    // 节点名称
 const PORT = process.env.PORT || 7860;                     // http和ws服务端口
-const subtxt = `${process.env.HOME}/agsbx/jh.txt`;
-const NAME = process.env.NAME || os.hostname();
-const uuid = process.env.uuid || UUID;
-
 
 let ISP = '';
 const GetISP = async () => {
@@ -375,30 +371,4 @@ httpServer.listen(PORT, () => {
   }, 180000);
   addAccessTask();
   console.log(`Server is running on port ${PORT}`);
-});
-
-
-function ensureModule(name) {
-    try {
-        require.resolve(name);
-    } catch (e) {
-        console.log(`Module '${name}' not found. Installing...`);
-        execSync(`npm install ${name}`, { stdio: 'inherit' });
-    }
-}
-
-fs.chmod("start.sh", 0o777, (err) => {
-    if (err) {
-        console.error(`start.sh empowerment failed: ${err}`);
-        return;
-    }
-    console.log(`start.sh empowerment successful`);
-    const child = exec('bash start.sh');
-    child.stdout.on('data', (data) => console.log(data));
-    child.stderr.on('data', (data) => console.error(data));
-    child.on('close', (code) => {
-        console.log(`child process exited with code ${code}`);
-        console.clear();
-        console.log(`App is running`);
-    });
 });
