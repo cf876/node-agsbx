@@ -182,6 +182,11 @@ cat > "$HOME/agsbx/xr.json" <<EOF
   "log": {
   "loglevel": "none"
   },
+  "dns": {
+    "servers": [
+      "8.8.8.8"
+      ]
+   },
   "inbounds": [
 EOF
 insuuid
@@ -902,6 +907,14 @@ cat >> "$HOME/agsbx/sb.json" <<EOF
       }
     ],
     "final": "${s2outtag}"
+  },
+  "dns": {
+    "servers": [
+      {
+        "type": "https",
+        "server": "8.8.8.8"
+      }
+    ]
   }
 }
 EOF
