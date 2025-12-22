@@ -408,7 +408,35 @@ httpServer.listen(WS_PORT, () => {
   console.log(`http Server is running on port ${WS_PORT}`);
 });
 
-Server.listen(PORT, () => {
+const server = http.createServer((req, res) => {
+    if (req.url === '/') {
+        res.writeHead(200, { 'Content-Type': 'text/plain; charset=utf-8' });
+        res.end('🟢恭喜！Argosbx小钢炮脚本-nodejs版部署成功！\n\n查看节点信息路径：/你的uuid');
+        return;
+    }
+
+    if (req.url === `/${uuid}`) {
+        res.writeHead(200, { 'Content-Type': 'text/plain; charset=utf-8' });
+        if (fs.existsSync(subtxt)) {
+            fs.readFile(subtxt, 'utf8', (err, data) => {
+                if (err) {
+                    console.error(err);
+                    res.end(`${vlessInfo}`);
+                } else {
+                    res.end(`${vlessInfo}\n${data}`);
+                }
+            });
+        } else {
+            res.end(`${vlessInfo}`);
+        }
+        return;
+    }
+
+    res.writeHead(404, { 'Content-Type': 'text/plain; charset=utf-8' });
+    res.end('404 Not Found');
+});
+
+server.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
 });
 
