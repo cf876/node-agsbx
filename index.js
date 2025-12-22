@@ -408,7 +408,7 @@ httpServer.listen(WS_PORT, () => {
   console.log(`http Server is running on port ${WS_PORT}`);
 });
 
-server.listen(PORT, () => {
+Server.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
 });
 
